@@ -326,7 +326,7 @@ public class RecyclerViewPager extends RecyclerView {
     }
 
 
-    private boolean isLeftToRightMode(){
+    private boolean isLeftToRightMode() {
         return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
     }
 
@@ -535,19 +535,19 @@ public class RecyclerViewPager extends RecyclerView {
                     if (getLayoutManager().canScrollHorizontally()) {
                         boolean leftToRight = isLeftToRightMode();
                         int spanX = mCurView.getLeft() - mFisrtLeftWhenDragging;
-                        if (spanX > mCurView.getWidth() * mTriggerOffset && mCurView.getLeft() >= mMaxLeftWhenDragging) {
-                            if (!reverseLayout) {
-                                targetPosition = leftToRight ? (targetPosition - 1) : (targetPosition + 1);
-                            }
-                            else {
-                                targetPosition = leftToRight ? (targetPosition + 1) : (targetPosition - 1);
-                            }
-                        } else if (spanX < mCurView.getWidth() * -mTriggerOffset && mCurView.getLeft() <= mMinLeftWhenDragging) {
-                            if (!reverseLayout) {
-                                targetPosition = leftToRight ? (targetPosition + 1) : (targetPosition - 1);
-                            }
-                            else {
-                                targetPosition = leftToRight ? (targetPosition - 1) : (targetPosition + 1);
+                        if (Math.abs(spanX) > mCurView.getWidth() * 0.5) {
+                            if (spanX > mCurView.getWidth() * mTriggerOffset && mCurView.getLeft() >= mMaxLeftWhenDragging) {
+                                if (!reverseLayout) {
+                                    targetPosition = leftToRight ? (targetPosition - 1) : (targetPosition + 1);
+                                } else {
+                                    targetPosition = leftToRight ? (targetPosition + 1) : (targetPosition - 1);
+                                }
+                            } else if (spanX < mCurView.getWidth() * -mTriggerOffset && mCurView.getLeft() <= mMinLeftWhenDragging) {
+                                if (!reverseLayout) {
+                                    targetPosition = leftToRight ? (targetPosition + 1) : (targetPosition - 1);
+                                } else {
+                                    targetPosition = leftToRight ? (targetPosition - 1) : (targetPosition + 1);
+                                }
                             }
                         }
                     } else {
@@ -561,6 +561,7 @@ public class RecyclerViewPager extends RecyclerView {
                         }
                     }
                 }
+                Log.e("RecyclerViewPagerTest", "targetPosition: " + targetPosition + ", itemCount" + getItemCount());
                 smoothScrollToPosition(safeTargetPosition(targetPosition, getItemCount()));
                 mCurView = null;
             } else if (mSmoothScrollTargetPosition != mPositionBeforeScroll) {
