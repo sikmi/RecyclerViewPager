@@ -241,6 +241,7 @@ public class RecyclerViewPager extends RecyclerView {
                             final int time = calculateTimeForDeceleration(distance);
                             if (time > 0) {
                                 action.update(-dx, -dy, time, mDecelerateInterpolator);
+                                action.setDuration(action.getDuration() * 5);
                             }
                         }
 
@@ -561,7 +562,6 @@ public class RecyclerViewPager extends RecyclerView {
                         }
                     }
                 }
-                Log.e("RecyclerViewPagerTest", "targetPosition: " + targetPosition + ", itemCount" + getItemCount());
                 smoothScrollToPosition(safeTargetPosition(targetPosition, getItemCount()));
                 mCurView = null;
             } else if (mSmoothScrollTargetPosition != mPositionBeforeScroll) {
