@@ -241,7 +241,7 @@ public class RecyclerViewPager extends RecyclerView {
                             final int time = calculateTimeForDeceleration(distance);
                             if (time > 0) {
                                 action.update(-dx, -dy, time, mDecelerateInterpolator);
-                                action.setDuration(action.getDuration() * 5);
+                                action.setDuration(action.getDuration() * 3);
                             }
                         }
 
