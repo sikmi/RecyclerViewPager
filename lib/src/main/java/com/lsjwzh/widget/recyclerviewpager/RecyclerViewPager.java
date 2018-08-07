@@ -620,4 +620,11 @@ public class RecyclerViewPager extends RecyclerView {
     public float getlLastY() {
         return mLastY;
     }
+
+    @Override
+    public void smoothScrollBy(int dx, int dy) {
+        // NOTE: pos=1 で軽く指を左方向にスワイプすると横滑りが発生してしまう。
+        // それを抑止するための workaround
+//        super.smoothScrollBy(dx, dy);
+    }
 }
